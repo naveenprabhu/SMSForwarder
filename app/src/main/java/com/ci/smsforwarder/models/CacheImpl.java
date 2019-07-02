@@ -28,6 +28,10 @@ public class CacheImpl implements Cache{
         if (filterInfos == null)
             filterInfos = new ArrayList<>();
         filterInfos.add(filterInfo);
+        saveFilterInfos(filterInfos);
+    }
+
+    private void saveFilterInfos(List<FilterInfo> filterInfos) {
         Editor filtereditor = this.sharedPreferences.edit();
         Gson gson = new Gson();
         String filterInfoJson = gson.toJson(filterInfos);
@@ -41,6 +45,13 @@ public class CacheImpl implements Cache{
         Type listType = new TypeToken<ArrayList<FilterInfo>>(){}.getType();
         List<FilterInfo> filterInfos = gson.fromJson(filterInfoJson, listType);
         return filterInfos != null ? filterInfos : new ArrayList<FilterInfo>();
+    }
+
+    public void updateFilterInfo(int posistion, FilterInfo filterInfo){
+        List<FilterInfo> filterInfos = this.retrieveFilterInfoDetails();
+        filterInfos.set(posistion, filterInfo);
+        saveFilterInfos(filterInfos);
+
     }
 
 }

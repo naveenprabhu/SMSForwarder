@@ -1,15 +1,12 @@
 package com.ci.smsforwarder.receiver;
 
-import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
-import android.widget.Toast;
 
 import com.ci.smsforwarder.AppController;
 import com.ci.smsforwarder.models.CacheImpl;
@@ -53,9 +50,11 @@ public class SMSReceiver extends BroadcastReceiver {
                 String message = stringBuilder.toString();
                 List<FilterInfo> filterInfoList = cache.retrieveFilterInfoDetails();
                 for (FilterInfo filterInfo : filterInfoList){
-                    SmsManager smsManager = SmsManager.getDefault();
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-                    smsManager.sendTextMessage(filterInfo.getNumber(), null, message, pendingIntent, null);
+                    if (filterInfo.isIsfilterStatusOn()){
+                        SmsManager smsManager = SmsManager.getDefault();
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+                        smsManager.sendTextMessage(filterInfo.getNumber(), null, message, pendingIntent, null);
+                    }
                 }
             }
 

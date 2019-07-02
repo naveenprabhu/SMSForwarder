@@ -5,8 +5,9 @@
     <string name="submit_button">Submit</string>
     <string name="filter_name">Name of the filter</string>
     <string name="no_data_available">No filters available, please tap on the + button below to add a new filters</string>
-    <string name="invalid_number_error_message">Please enter forwarding number with country code</string>
+    <string name="invalid_number_error_message">Please enter forwarding number with country code without spaces or hyphen \n Ex: +61123456789</string>
     <string name="invalid_name_error_message">Please enter valid filter name</string>
     <string name="invalid_error_title">Invalid data entry</string>
+    <string name="ok_button">Ok</string>
 
 </resources>

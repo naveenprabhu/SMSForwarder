@@ -66,11 +66,10 @@ public class AddFilterActivity extends Activity implements AddFilterView {
     public void invalidDataErrorMessage(int errorMessageResourceId) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle(R.id.in);
-//        builder.setMessage(INVALID_ERROR_MESSAGE);
-//        builder.setPositiveButton("OK")
-//
-//        builder.show();
+        builder.setTitle(R.string.invalid_error_title);
+        builder.setMessage(errorMessageResourceId);
+        builder.setPositiveButton(R.string.ok_button, null);
+        builder.show();
 
 
     }

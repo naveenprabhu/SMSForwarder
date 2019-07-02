@@ -3,6 +3,7 @@ package com.ci.smsforwarder;
 
 import com.ci.smsforwarder.activity.AddFilterActivity;
 import com.ci.smsforwarder.activity.ViewFiltersActivity;
+import com.ci.smsforwarder.adapter.MyRecyclerViewAdapter;
 import com.ci.smsforwarder.module.AppModule;
 import com.ci.smsforwarder.module.SMSForwarderMoudle;
 import com.ci.smsforwarder.receiver.SMSReceiver;
@@ -20,5 +21,7 @@ public interface AppComponent {
     void inject(AddFilterActivity addFilterActivity);
 
     void inject(SMSReceiver smsReceiver);
+
+    void inject(MyRecyclerViewAdapter.ViewHolder viewHolder);
 
 }
