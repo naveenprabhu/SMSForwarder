@@ -9,5 +9,7 @@
     <string name="invalid_name_error_message">Please enter valid filter name</string>
     <string name="invalid_error_title">Invalid data entry</string>
     <string name="ok_button">Ok</string>
+    <string name="AD_MOB_APPID">ca-app-pub-5288765502564454~7450589424</string>
+    <string name="AD_BOTTOM_PRO">ca-app-pub-5288765502564454/9399941821</string>
 
 </resources>

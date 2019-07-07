@@ -1,19 +1,21 @@
 package com.ci.smsforwarder.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,7 +23,6 @@ import com.ci.smsforwarder.AppController;
 import com.ci.smsforwarder.R;
 import com.ci.smsforwarder.adapter.MyRecyclerViewAdapter;
 import com.ci.smsforwarder.models.FilterInfo;
-import com.ci.smsforwarder.presenter.AddFilterPresenter;
 import com.ci.smsforwarder.presenter.ViewFiltersPresenter;
 import com.ci.smsforwarder.view.ViewFiltersView;
 
@@ -32,16 +33,12 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.ci.smsforwarder.utils.Constants.FILTER_NAME;
-
 public class ViewFiltersActivity extends AppCompatActivity implements ViewFiltersView {
 
     public static final int ADD_FILTER_ACTIVITY_REQUEST_CODE = 2;
     private static final int SMS_FORWARD_PERMISSION_CONSTANT = 100;
 
-
     private MyRecyclerViewAdapter mAdapter;
-
 
     @Inject
     ViewFiltersPresenter viewFiltersPresenter;
@@ -52,13 +49,18 @@ public class ViewFiltersActivity extends AppCompatActivity implements ViewFilter
     @BindView(R.id.emptytextView)
     TextView emptyTextView;
 
+    @BindView(R.id.adView)
+    AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MobileAds.initialize(this, getString(R.string.AD_MOB_APPID));
         setContentView(R.layout.activity_main);
         ((AppController) getApplicationContext()).getAppComponent().inject(this);
         ButterKnife.bind(this);
         viewFiltersPresenter.setView(this);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -72,6 +74,10 @@ public class ViewFiltersActivity extends AppCompatActivity implements ViewFilter
         });
         setupRecyclerViewWithData();
         checkAndRequestPermissions();
+
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+        mAdView.loadAd(adRequest);
 
 
     }
