@@ -26,6 +26,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filterNameEditText"
+        app:ccp_autoDetectCountry="true"
+        app:ccp_rememberLastSelection="true"
         ></com.hbb20.CountryCodePicker>
 
     <EditText

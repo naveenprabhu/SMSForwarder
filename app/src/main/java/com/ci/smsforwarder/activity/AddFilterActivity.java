@@ -13,6 +13,7 @@ import com.ci.smsforwarder.R;
 import com.ci.smsforwarder.models.FilterInfo;
 import com.ci.smsforwarder.presenter.AddFilterPresenter;
 import com.ci.smsforwarder.view.AddFilterView;
+import com.hbb20.CountryCodePicker;
 
 import javax.inject.Inject;
 
@@ -32,6 +33,9 @@ public class AddFilterActivity extends Activity implements AddFilterView {
     @BindView(R.id.filterNameEditText)
     EditText filteredNameEditText;
 
+    @BindView(R.id.ccp)
+    CountryCodePicker countryCodePicker;
+
     @Inject
     AddFilterPresenter addFilterPresenter;
 
@@ -43,13 +47,15 @@ public class AddFilterActivity extends Activity implements AddFilterView {
         ButterKnife.bind(this);
         addFilterPresenter.setView(this);
 
+        countryCodePicker.registerCarrierNumberEditText(filterNumberEditText);
+
     }
 
     @OnClick(R.id.submitButton)
     public void submitButtonClicked(){
         String filterName = filteredNameEditText.getText().toString();
         String filterForwardNumber = filterNumberEditText.getText().toString();
-        addFilterPresenter.validateUserEnteredDetails(filterName, filterForwardNumber);
+        addFilterPresenter.validateAndSubmitUserEnteredDetails(filterName, countryCodePicker);
 
     }
 

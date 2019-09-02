@@ -4,13 +4,12 @@ import com.ci.smsforwarder.R;
 import com.ci.smsforwarder.models.CacheImpl;
 import com.ci.smsforwarder.models.FilterInfo;
 import com.ci.smsforwarder.view.AddFilterView;
-
-import java.util.List;
+import com.hbb20.CountryCodePicker;
 
 public class AddFilterPresenter extends BasePresenter<AddFilterView>{
 
     public static final String FILTER_NAME_REGEX = "^[a-zA-Z0-9_.-]*$";
-    public static final String PHONE_NUMBER_REGEX = "^\\+[0-9]{10,13}$";
+    public static final String PHONE_NUMBER_REGEX = "^\\[0-9]{10,13}$";
     private CacheImpl cacheImpl;
 
     public AddFilterPresenter(CacheImpl cacheImpl) {
@@ -22,12 +21,12 @@ public class AddFilterPresenter extends BasePresenter<AddFilterView>{
         cacheImpl.saveFilterInfo(filterInfo);
     }
 
-    public void validateUserEnteredDetails(String filterName, String filterForwardNumber) {
+    public void validateAndSubmitUserEnteredDetails(String filterName, CountryCodePicker ccp) {
 
-        if (hasUserEnteredValidDetails(filterName, filterForwardNumber)) {
+        if (hasUserEnteredValidDetails(filterName, ccp)) {
             FilterInfo filterInfo = FilterInfo.builder()
                     .name(filterName)
-                    .number(filterForwardNumber)
+                    .number(ccp.getFullNumberWithPlus())
                     .isfilterStatusOn(true)
                     .build();
             getView().saveUserInfoAndNavigateToMainScreen(filterInfo);
@@ -37,7 +36,7 @@ public class AddFilterPresenter extends BasePresenter<AddFilterView>{
 
     }
 
-    private boolean hasUserEnteredValidDetails(String filterName, String filterForwardNumber) {
-        return filterName.matches(FILTER_NAME_REGEX) && filterForwardNumber.matches(PHONE_NUMBER_REGEX);
+    private boolean hasUserEnteredValidDetails(String filterName, CountryCodePicker ccp) {
+        return filterName.matches(FILTER_NAME_REGEX) && ccp.isValidFullNumber();
     }
 }
