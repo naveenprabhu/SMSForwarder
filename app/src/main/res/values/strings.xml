@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SMSForwarder</string>
     <string name="action_settings">Settings</string>
-    <string name="forward_number">Number to forward SMS with country code</string>
+    <string name="forward_number">Number to forward the SMS</string>
     <string name="submit_button">Submit</string>
     <string name="filter_name">Name of the filter</string>
     <string name="no_data_available">No filters available, please tap on the + button below to add a new filters</string>
