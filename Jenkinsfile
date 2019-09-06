@@ -9,6 +9,7 @@ pipeline {
     stage('Checkout') {
       steps {
         git(url: 'https://github.com/naveenprabhu/SMSForwarder', branch: 'master')
+        sh 'apt-get update'
       }
     }
   }
