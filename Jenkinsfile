@@ -6,9 +6,9 @@ pipeline {
 
   }
   stages {
-    stage('Checkout') {
+    stage('Test') {
       steps {
-        sh 'apt-get update'
+        sh 'fastlane test'
       }
     }
   }
