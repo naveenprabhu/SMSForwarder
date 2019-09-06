@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'runmymind:docker-android-sdk'
+      image 'maven:3-alpine'
     }
 
   }
