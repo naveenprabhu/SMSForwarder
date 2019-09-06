@@ -11,5 +11,11 @@ pipeline {
         sh 'fastlane test'
       }
     }
+    stage('UI Test') {
+      steps {
+        sh '''fastlane build_for_screengrab
+fastlane screengrab'''
+      }
+    }
   }
 }
