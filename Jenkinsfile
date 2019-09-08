@@ -1,8 +1,8 @@
 pipeline {
   agent {
     docker {
-      args '-v $(pwd)/sdk:/opt/android-sdk'
       image 'thyrlian/android-sdk'
+      args '-v $(PWD)/sdk:/opt/android-sdk'
     }
 
   }
