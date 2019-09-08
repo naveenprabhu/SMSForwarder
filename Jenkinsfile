@@ -1,7 +1,8 @@
 pipeline {
   agent {
     docker {
-      image 'opengamer/android-sdk-gradle-fastlane'
+      args '-v $(pwd)/sdk:/opt/android-sdk'
+      image 'thyrlian/android-sdk'
     }
 
   }
