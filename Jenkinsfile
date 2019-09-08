@@ -16,12 +16,7 @@ pipeline {
         }
         stage('Create AVD') {
           steps {
-            sh '''cd /
-./$ANDROID_HOME/tools/bin/sdkmanager "system-images;android-29;google_apis;x86_64"
-./$ANDROID_HOME/tools/bin/sdkmanager --licenses
-echo no | ./$ANDROID_HOME/tools/bin/avdmanager create avd -n test -k "system-images;android-29;google_apis;x86_64"
-
-'''
+            sh './gradlew test'
           }
         }
       }
