@@ -1,8 +1,8 @@
 pipeline {
   agent {
     docker {
-      image 'thyrlian/android-sdk'
-      args '-v $PWD/sdk:/opt/android-sdk'
+      image 'budtmo/docker-android-x86-9.0'
+      args '--privileged -d -p 6080:6080 -p 5554:5554 -p 5555:5555 -e DEVICE="Samsung Galaxy S6" --name android-container'
     }
 
   }
