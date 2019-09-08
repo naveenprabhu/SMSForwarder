@@ -8,17 +8,8 @@ pipeline {
   }
   stages {
     stage('Test') {
-      parallel {
-        stage('Test') {
-          steps {
-            sh 'fastlane test'
-          }
-        }
-        stage('Create AVD') {
-          steps {
-            sh './gradlew test'
-          }
-        }
+      steps {
+        sh './gradlew test'
       }
     }
     stage('UI Test') {
